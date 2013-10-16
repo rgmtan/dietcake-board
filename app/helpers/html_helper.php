@@ -12,7 +12,7 @@ function readable_text($s)
     return $s;
 }
 
-function pagination($last_page, $pagenum)
+function pagination($last_page, $pagenum, $clickable)
 {
     $pagination_ctrl = "";
 
@@ -33,7 +33,7 @@ function pagination($last_page, $pagenum)
             $pagination_ctrl .= '<a href = "'.url('', array('page' => $previous)).'">Previous</a>';
         }
 
-        for($i = $pagenum - 4; $i < $pagenum; $i++) {
+        for($i = $pagenum - $clickable; $i < $pagenum; $i++) {
             if ($i > 0) {
                 $pagination_ctrl .= '<a href = "'.url('', array('page' => $i)).'">'.$i.'</a>';
             }
@@ -43,7 +43,7 @@ function pagination($last_page, $pagenum)
 
         for ($i = $pagenum + 1; $i <= $last_page; $i++) {
             $pagination_ctrl .= '<a href = "'.url('', array('page' => $i)).'">'.$i.'</a>';
-            if ($i >= $pagenum + 4) {
+            if ($i >= $pagenum + $clickable) {
                 break;
             }
         }

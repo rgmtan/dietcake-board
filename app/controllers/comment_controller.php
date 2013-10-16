@@ -23,7 +23,7 @@ class CommentController extends AppController
         $offset = $array['offset'];
         $pagenum = $array['pagenum'];
 
-        $pagination_ctrl = pagination($last_page, $pagenum);
+        $pagination_ctrl = pagination($last_page, $pagenum, 4);
         $this->set(get_defined_vars());
     }
 
