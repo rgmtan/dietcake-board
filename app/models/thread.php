@@ -29,11 +29,13 @@ class Thread extends AppModel
 
     public static function getAll($page)
     {
-        if(!isset($page)) {
+        // if 'page' is NULL, set $page to 1
+        if (!isset($page)) {
             $page = 1;
         }
         $threads = array();
         $db = DB::conn();
+        // $rowCount, $lastPage, $offset is used for pagination
         $rowCount = $db->value('SELECT COUNT(*) FROM thread');
         $lastPage = ceil($rowCount/Thread::MAX_THREADS);
         $offset = ($page - 1) * Thread::MAX_THREADS;
@@ -51,10 +53,12 @@ class Thread extends AppModel
 
     public function getComments($page)
     {
-        if(!isset($page)) {
+        // if 'page' is NULL, set $page to 1
+        if (!isset($page)) {
             $page = 1;
         }
         $comments = array();
+        // $rowCount, $lastPage, $offset is used for pagination
         $db = DB::conn();
         $rowCount = $db->value(
             'SELECT COUNT(*) FROM comment WHERE thread_id = ?',
