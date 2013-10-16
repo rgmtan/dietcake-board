@@ -20,17 +20,18 @@ class UserController extends AppController
             case 'login_success':
                 $user->username = Param::get('username');
                 $user->password = Param::get('password');
-                try {
-                    $page = $user->login();
-                } catch (ValidationException $e) {
-                    $page = 'login';
+                if ($user->login()) {
+                    $_SESSION['username'] = Param::get('username');
+                    $page = 'login_success';
+                }
+                else {
+                    $page = 'login_failed';
                 }
                 break;
             default:
                 throw new NotFoundException("{$page} is not found");
                 break;
         }
-
         $this->set(get_defined_vars());
         $this->render($page);
     }

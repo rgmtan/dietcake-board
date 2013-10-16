@@ -28,10 +28,6 @@ class Thread extends AppModel
 
     public static function getAll($page)
     {
-        // if 'page' is NULL, set $page to 1
-        if (!isset($page)) {
-            $page = 1;
-        }
         $threads = array();
         $db = DB::conn();
         // $row_count, $last_page, $offset is used for pagination
@@ -39,7 +35,6 @@ class Thread extends AppModel
         $last_page = ceil($row_count/Thread::MAX_THREADS);
         $offset = ($page - 1) * Thread::MAX_THREADS;
 
-        $db = DB::conn();
         $rows = $db->rows('SELECT * FROM thread ORDER BY created DESC, id DESC
                             LIMIT '.Thread::MAX_THREADS. ' OFFSET '.$offset
         );
@@ -61,7 +56,11 @@ class Thread extends AppModel
 
         $db = DB::conn();
         $db->begin();
-        $db->query('INSERT INTO thread SET title = ?, username = ?', array($this->title, $_SESSION['username']));
+        $params = array(
+            "title" => $this->title,
+            "username" => $_SESSION['username']
+        );
+        $db->insert("thread", $params);
 
         $comment->thread_id = $db->lastInsertId();
         // write first comment at the same time

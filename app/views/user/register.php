@@ -8,12 +8,14 @@
  */
 ?>
 <?php session_unset(); ?>
-<?php if($user->hasError() || $user->user_exists || (!is_null($user->rep_password) && !$user->rep_password)) : ?>
+<?php if (isset($user->username)) : ?>
+<?php if($user->hasError() || $user->isUserExisting() ||
+          (!is_null($user->rep_password) && !$user->isPasswordMatching())) : ?>
     <div class="alert alert-block">
-        <?php if($user->user_exists) : ?>
+        <?php if($user->isUserExisting()) : ?>
             <div><em>Username exists!</em></div>
         <?php endif ?>
-        <?php if(!$user->rep_password) : ?>
+        <?php if(!$user->isPasswordMatching()) : ?>
             <div><em>Passwords do not match!</em></div>
         <?php endif ?>
         <?php if(!empty($user->validation_errors['username']['length'])): ?>
@@ -31,6 +33,7 @@
             </div>
         <?php endif ?>
     </div>
+<?php endif ?>
 <?php endif ?>
 
 <h1>User Registration</h1>

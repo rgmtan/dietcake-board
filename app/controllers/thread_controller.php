@@ -14,7 +14,7 @@ class ThreadController extends AppController
         if(!isset($_SESSION['username'])) {
             $this->render('index2');
         }
-        $array = Thread::getAll(Param::get('page'));
+        $array = Thread::getAll(Param::get('page',1));
         $threads = $array[0];
 
         // pagination parameters

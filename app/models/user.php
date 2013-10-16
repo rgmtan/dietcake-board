@@ -8,7 +8,6 @@
  */
 class User extends AppModel
 {
-    public $user_exists;
     public $rep_password;
     public $page;
 
@@ -27,7 +26,7 @@ class User extends AppModel
 
     public function login()
     {
-        if(!$this->validate()) {
+        if (!$this->validate()) {
             throw new ValidationException('Login information is invalid');
         }
 
@@ -39,59 +38,45 @@ class User extends AppModel
                 md5($this->password),
             )
         );
-
-        if($row) {
-            $_SESSION['username'] = $this->username;
-            return $this->page = 'login_success';
-        }
-        else {
-            return $this->page = 'login_failed';
-        }
+        return $row ? true : false;
     }
 
     public function logout()
     {
-        session_unset();
         session_destroy();
         $this->page = 'logout';
     }
 
     public function register()
     {
-        $this->userExists();
-        $this->passwordMatch();
-        if(!$this->validate() || $this->user_exists || !$this->rep_password) {
+        if (!$this->validate() || $this->isUserExisting() || !$this->isPasswordMatching()) {
             throw new ValidationException('Invalid registration information');
         }
 
         $db = DB::conn();
-        $db->query('INSERT INTO users SET username = ?, password = ?',
-            array($this->username, md5($this->password))
+        $params = array(
+            "username" => $this->username,
+            "password" => md5($this->password)
         );
-
+        $db->insert("users", $params);
     }
 
-    public function userExists()
+    public function isUserExisting()
     {
         $db = DB::conn();
 
         $row = $db->row('SELECT 1 FROM users WHERE username = ?', array($this->username));
 
-        if($row) {
-            return $this->user_exists = true;
-        }
-        else {
-            return $this->user_exists = false;
-        }
+        return $row ? true : false;
     }
 
-    public function passwordMatch()
+    public function isPasswordMatching()
     {
         if (!strcmp($this->password, $this->rep_password)) {
-            return $this->rep_password = true;
+            return true;
         }
         else {
-            return $this->rep_password = false;
+            return false;
         }
     }
 }

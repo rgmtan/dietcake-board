@@ -22,10 +22,6 @@ class Comment extends AppModel
 
     public function getComments($page)
     {
-        // if 'page' is NULL, set $page to 1
-        if (!isset($page)) {
-            $page = 1;
-        }
         $comments = array();
         // $rowCount, $lastPage, $offset is used for pagination
         $db = DB::conn();
@@ -37,7 +33,6 @@ class Comment extends AppModel
         $last_page = ceil($row_count/Comment::MAX_COMMENTS);
         $offset = ($page - 1) * Comment::MAX_COMMENTS;
 
-        $db = DB::conn();
         $rows = $db->rows(
             'SELECT * FROM comment WHERE thread_id = ? ORDER BY created ASC
             LIMIT '.Comment::MAX_COMMENTS.' OFFSET '.$offset,
@@ -56,9 +51,11 @@ class Comment extends AppModel
             throw new ValidationException('invalid comment');
         }
         $db = DB::conn();
-        $db->query(
-            'INSERT INTO comment SET thread_id = ?, username = ?, body = ?',
-            array($this->thread_id, $_SESSION['username'], $this->body)
+        $params = array(
+            "thread_id" => $this->thread_id,
+            "username" => $_SESSION['username'],
+            "body" => $this->body
         );
+        $db->insert("comment", $params);
     }
 }

@@ -14,7 +14,7 @@ class CommentController extends AppController
         $thread = Thread::get(Param::get('thread_id'));
         $comment = new Comment;
         $comment->thread_id = Param::get('thread_id');
-        $array = $comment->getComments(Param::get('page'));
+        $array = $comment->getComments(Param::get('page',1));
         $comments = $array[0];
 
         // pagination parameters
