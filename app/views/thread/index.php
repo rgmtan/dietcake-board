@@ -13,7 +13,7 @@
     <?php foreach ($threads as $v): ?>
         <tr>
             <td>
-                <a href="<?php eh(url('thread/view', array('thread_id' => $v->id))) ?>">
+                <a href="<?php eh(url('comment/view', array('thread_id' => $v->id))) ?>">
                     <?php eh($v->title) ?>
                 </a>
             </td>
@@ -24,7 +24,7 @@
 <div class="pager page-header">
     <?php
     // If there is more than 1 page of results
-    if($lastPage != 1) :
+    if($lastPage > 1) :
         /**
          * Checks if we're on page 1. If yes, then we don't need a link
          * to the previous page or the first page. If not, we generate

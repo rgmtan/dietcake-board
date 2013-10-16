@@ -24,7 +24,7 @@
 <div class="pager page-header">
     <?php
     // If there is more than 1 page of results
-    if($lastPage != 1) :
+    if($lastPage > 1) :
         /**
          * Checks if we're on page 1. If yes, then we don't need a link
          * to the previous page or the first page. If not, we generate
@@ -53,7 +53,7 @@
         <?php endif ?>
     <?php endif ?>
 </div>
-<form class="well" method="post" action="<?php eh(url('thread/write')) ?>">
+<form class="well" method="post" action="<?php eh(url('comment/write')) ?>">
     <label>Comment</label>
     <textarea name="body"><?php eh(Param::get('body')) ?></textarea>
     <br />

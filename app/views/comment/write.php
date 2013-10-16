@@ -27,7 +27,7 @@
     <?php endif ?>
 </div>
 <?php endif ?>
-<form class="well" method="post" action="<?php eh(url('thread/write')) ?>">
+<form class="well" method="post" action="<?php eh(url('comment/write')) ?>">
     <label>Your name</label>
     <input type="text" class="span2" name="username" value="<?php eh(Param::get('username')) ?>">
     <label>Comment</label>
