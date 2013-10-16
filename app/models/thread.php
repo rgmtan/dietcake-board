@@ -34,9 +34,9 @@ class Thread extends AppModel
         }
         $threads = array();
         $db = DB::conn();
-        // $rowCount, $lastPage, $offset is used for pagination
-        $rowCount = $db->value('SELECT COUNT(*) FROM thread');
-        $lastPage = ceil($rowCount/Thread::MAX_THREADS);
+        // $row_count, $last_page, $offset is used for pagination
+        $row_count = $db->value('SELECT COUNT(*) FROM thread');
+        $last_page = ceil($row_count/Thread::MAX_THREADS);
         $offset = ($page - 1) * Thread::MAX_THREADS;
 
         $db = DB::conn();
@@ -47,7 +47,7 @@ class Thread extends AppModel
             $threads[] = new Thread($row);
         }
 
-        return array($threads,$rowCount,$lastPage,$offset,$page);
+        return array($threads,$last_page,$offset,$page);
     }
 
     public function create(Comment $comment)

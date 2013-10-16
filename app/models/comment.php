@@ -30,11 +30,11 @@ class Comment extends AppModel
         // $rowCount, $lastPage, $offset is used for pagination
         $db = DB::conn();
 
-        $rowCount = $db->value(
+        $row_count = $db->value(
             'SELECT COUNT(*) FROM comment WHERE thread_id = ?',
             array($this->thread_id)
         );
-        $lastPage = ceil($rowCount/Comment::MAX_COMMENTS);
+        $last_page = ceil($row_count/Comment::MAX_COMMENTS);
         $offset = ($page - 1) * Comment::MAX_COMMENTS;
 
         $db = DB::conn();
@@ -47,7 +47,7 @@ class Comment extends AppModel
             $comments[] = new self ($row);
         }
 
-        return array($comments,$rowCount,$lastPage,$offset,$page);
+        return array($comments, $last_page, $offset, $page);
     }
 
     public function write()

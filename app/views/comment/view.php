@@ -24,7 +24,7 @@
 <div class="pager page-header">
     <?php
     // If there is more than 1 page of results
-    if($lastPage > 1) :
+    if($last_page > 1) :
         /**
          * Checks if we're on page 1. If yes, then we don't need a link
          * to the previous page or the first page. If not, we generate
@@ -42,13 +42,13 @@
         echo $pagenum ?>
         <?php
         // Render links of pages.
-        for($i = $pagenum + 1; $i <= $lastPage; $i++) : ?>
+        for($i = $pagenum + 1; $i <= $last_page; $i++) : ?>
             <a href="<?php eh(url('',array('page' => $i)))?>"><?php echo $i ?></a>
             <?php if($i >= $pagenum + 4) : break; endif ?>
         <?php endfor ?>
         <?php
         // Same as above but instead, checks if we're on the last page and generate next link.
-        if($pagenum != $lastPage) : $next = $pagenum + 1; ?>
+        if($pagenum != $last_page) : $next = $pagenum + 1; ?>
             <a href="<?php eh(url('',array('page' => $next)))?>">Next</a>
         <?php endif ?>
     <?php endif ?>

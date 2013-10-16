@@ -18,10 +18,9 @@ class ThreadController extends AppController
         $threads = $array[0];
 
         // pagination parameters
-        $rowCount = $array[1];
-        $lastPage = $array[2];
-        $offset = $array[3];
-        $pagenum = $array[4];
+        $last_page = $array[1];
+        $offset = $array[2];
+        $pagenum = $array[3];
 
         $this->set(get_defined_vars());
     }
