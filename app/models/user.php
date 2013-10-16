@@ -75,8 +75,7 @@ class User extends AppModel
         if (!strcmp($this->password, $this->rep_password)) {
             return true;
         }
-        else {
-            return false;
-        }
+
+        return false;
     }
 }
