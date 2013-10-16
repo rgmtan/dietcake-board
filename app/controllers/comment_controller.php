@@ -16,12 +16,12 @@ class CommentController extends AppController
         $thread = Thread::get($thread_id);
         $comment->thread_id = $thread_id;
         $array = $comment->getComments(Param::get('page',1));
-        $comments = $array[0];
+        $comments = $array['comments'];
 
         // pagination parameters
-        $last_page = $array[1];
-        $offset = $array[2];
-        $pagenum = $array[3];
+        $last_page = $array['last_page'];
+        $offset = $array['offset'];
+        $pagenum = $array['pagenum'];
 
         $this->set(get_defined_vars());
     }

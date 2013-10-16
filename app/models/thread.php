@@ -42,7 +42,12 @@ class Thread extends AppModel
             $threads[] = new Thread($row);
         }
 
-        return array($threads,$last_page,$offset,$page);
+        return array(
+            'threads' => $threads,
+            'last_page' => $last_page,
+            'offset' => $offset,
+            'pagenum' => $page
+        );
     }
 
     public function create(Comment $comment)

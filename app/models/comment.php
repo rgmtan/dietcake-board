@@ -42,7 +42,12 @@ class Comment extends AppModel
             $comments[] = new self ($row);
         }
 
-        return array($comments, $last_page, $offset, $page);
+        return array(
+            'coments' => $comments,
+            'last_page' => $last_page,
+            'offset' => $offset,
+            'pagenum' => $page
+        );
     }
 
     public function write()

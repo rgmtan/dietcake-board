@@ -15,12 +15,12 @@ class ThreadController extends AppController
             $this->render('index2');
         }
         $array = Thread::getAll(Param::get('page',1));
-        $threads = $array[0];
+        $threads = $array['threads'];
 
         // pagination parameters
-        $last_page = $array[1];
-        $offset = $array[2];
-        $pagenum = $array[3];
+        $last_page = $array['last_page'];
+        $offset = $array['offset'];
+        $pagenum = $array['pagenum'];
 
         $this->set(get_defined_vars());
     }
