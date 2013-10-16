@@ -43,7 +43,7 @@ class Comment extends AppModel
         }
 
         return array(
-            'coments' => $comments,
+            'comments' => $comments,
             'last_page' => $last_page,
             'offset' => $offset,
             'pagenum' => $page

@@ -22,36 +22,7 @@
 </table>
 <hr>
 <div class="pager page-header">
-    <?php
-    // If there is more than 1 page of results
-    if($last_page > 1) :
-        /**
-         * Checks if we're on page 1. If yes, then we don't need a link
-         * to the previous page or the first page. If not, we generate
-         * links to the first page, and to the previous page.
-         * */
-        if($pagenum > 1) : $previous = $pagenum - 1; ?>
-            <a href="<?php eh(url('',array('page' => $previous)))?>">Previous</a>
-            <?php
-            // Renders links of pages.
-            for($i = $pagenum - 4; $i < $pagenum; $i++) : if($i > 0) : ?>
-                <a href="<?php eh(url('',array('page' => $i)))?>"><?php echo $i ?></a>
-            <?php endif; endfor; ?>
-        <?php endif;
-        // render the target pagenum but without it being a link
-        echo $pagenum ?>
-        <?php
-        // Render links of pages.
-        for($i = $pagenum + 1; $i <= $last_page; $i++) : ?>
-            <a href="<?php eh(url('',array('page' => $i)))?>"><?php echo $i ?></a>
-            <?php if($i >= $pagenum + 4) : break; endif ?>
-        <?php endfor ?>
-        <?php
-        // Same as above but instead, checks if we're on the last page and generate next link.
-        if($pagenum != $last_page) : $next = $pagenum + 1; ?>
-            <a href="<?php eh(url('',array('page' => $next)))?>">Next</a>
-        <?php endif ?>
-    <?php endif ?>
+    <?php echo $pagination_ctrl; ?>
 </div>
 <form class="well" method="post" action="<?php eh(url('comment/write')) ?>">
     <label>Comment</label>
