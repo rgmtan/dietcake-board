@@ -49,7 +49,7 @@ class User extends AppModel
 
     public function register()
     {
-        if (!$this->validate() || $this->isUserExisting() || !$this->isPasswordMatching()) {
+        if (!$this->validate() || $this->isUserExisting() || $this->isPasswordMatching()) {
             throw new ValidationException('Invalid registration information');
         }
 
@@ -72,10 +72,6 @@ class User extends AppModel
 
     public function isPasswordMatching()
     {
-        if (!strcmp($this->password, $this->rep_password)) {
-            return true;
-        }
-
-        return false;
+        return strcmp($this->password, $this->rep_password);
     }
 }

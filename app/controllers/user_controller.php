@@ -11,6 +11,8 @@ class UserController extends AppController
 {
     public function login()
     {
+        session_unset();
+
         $user = new User;
         $page = Param::get('page_next', 'login');
 
@@ -43,6 +45,8 @@ class UserController extends AppController
 
     public function register()
     {
+        session_unset();
+
         $user = new User;
         $page = Param::get('page_next', 'register');
 

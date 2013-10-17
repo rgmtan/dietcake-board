@@ -7,7 +7,6 @@
  * To change this template use File | Settings | File Templates.
  */
 ?>
-<?php session_unset(); ?>
 <?php if($user->hasError()): ?>
     <div class="alert alert-block">
         <h4 class="alert-heading">Validation Errors!</h4>
@@ -28,7 +27,7 @@
     </div>
 <?php endif ?>
 <h2>Log In</h2>
-<form class="well" method="post" action="<?php eh(url('')) ?>">
+<form class="well" method="post" action="#">
     <label>Username</label>
     <input type="text" class="span3" name="username"  value="<?php eh(Param::get('username')) ?>">
     <label>Password</label>

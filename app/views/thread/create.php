@@ -27,7 +27,7 @@
     <?php endif ?>
 </div>
 <?php endif ?>
-<form class="well" method="post" action="<?php eh(url('')) ?>">
+<form class="well" method="post" action="#">
     <label>Title</label>
     <input type="text" class="span2" name="title" value="<?php eh(Param::get('title')) ?>">
     <label>Comment</label>

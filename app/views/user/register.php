@@ -7,15 +7,15 @@
  * To change this template use File | Settings | File Templates.
  */
 ?>
-<?php session_unset(); ?>
 <?php if (isset($user->username)) : ?>
 <?php if($user->hasError() || $user->isUserExisting() ||
-          (!is_null($user->rep_password) && !$user->isPasswordMatching())) : ?>
+          (!is_null($user->rep_password) && $user->isPasswordMatching())) : ?>
     <div class="alert alert-block">
+        <h4 class="alert-heading">Validation Errors!</h4>
         <?php if($user->isUserExisting()) : ?>
             <div><em>Username exists!</em></div>
         <?php endif ?>
-        <?php if(!$user->isPasswordMatching()) : ?>
+        <?php if($user->isPasswordMatching()) : ?>
             <div><em>Passwords do not match!</em></div>
         <?php endif ?>
         <?php if(!empty($user->validation_errors['username']['length'])): ?>
@@ -37,7 +37,7 @@
 <?php endif ?>
 
 <h1>User Registration</h1>
-<form class="well" method="post" action="<?php eh(url(''))?>">
+<form class="well" method="post" action="#">
     <label>Username</label>
     <input type="text" class="span3" name="username" value="<?php eh(Param::get('username')) ?>">
     <label>Password</label>
