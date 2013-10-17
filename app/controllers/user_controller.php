@@ -74,7 +74,6 @@ class UserController extends AppController
 
     public function logout()
     {
-        $user = new User;
-        $user->logout();
+        session_destroy();
     }
 }

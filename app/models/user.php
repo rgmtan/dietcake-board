@@ -41,11 +41,6 @@ class User extends AppModel
         return $row ? true : false;
     }
 
-    public function logout()
-    {
-        session_destroy();
-    }
-
     public function register()
     {
         if (!$this->validate() || $this->isUserExisting() || $this->isPasswordMatching()) {
