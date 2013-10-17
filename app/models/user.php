@@ -44,7 +44,6 @@ class User extends AppModel
     public function logout()
     {
         session_destroy();
-        $this->page = 'logout';
     }
 
     public function register()

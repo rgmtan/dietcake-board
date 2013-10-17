@@ -76,7 +76,5 @@ class UserController extends AppController
     {
         $user = new User;
         $user->logout();
-        $this->set(get_defined_vars());
-        $this->render();
     }
 }
